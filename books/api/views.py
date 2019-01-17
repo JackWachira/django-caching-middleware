@@ -9,8 +9,3 @@ class BooksViewSet(mixins.RetrieveModelMixin,
                    viewsets.GenericViewSet):
     queryset = Book.objects.filter()
     serializer_class = BookSerializer
-
-    def get_queryset(self):
-        queryset = self.filter_queryset(
-            super().get_queryset())
-        return queryset

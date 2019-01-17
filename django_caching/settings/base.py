@@ -22,9 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'm$hd%op#dm&+xle#g7-8=9(j1m3c6j+kz8u7j)hff&7c^!j7(d'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -38,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'books',
-    'core'
+    'core',
+    'django_nose'
 ]
 
 MIDDLEWARE = [
@@ -122,20 +120,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
-
-CACHE_URLS = [
-    {
-        'URL': '/api/v1/test/',
-        'TIMEOUT': '600'
-    },
-    {
-        'URL': '/api/v1/books/',
-        'TIMEOUT': '300'
-    }
-]
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
