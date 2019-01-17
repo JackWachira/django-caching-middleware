@@ -24,3 +24,6 @@ CACHE_URLS = [
         'TIMEOUT': '300'
     }
 ]
+
+NOSE_ARGS = ['--nocapture',
+             '--nologcapture', ]

@@ -25,5 +25,7 @@ CACHE_URLS = [
     }
 ]
 
-NOSE_ARGS = ['--nocapture',
-             '--nologcapture', ]
+NOSE_ARGS = [
+    '--cover-erase',
+    '--cover-package=books',
+]

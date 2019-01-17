@@ -3,7 +3,8 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_caching.settings.dev")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+                          "django_caching.settings.dev")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
@@ -19,4 +20,18 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+    is_testing = 'test' in sys.argv
+
+    if is_testing:
+        import coverage
+    cov = coverage.coverage(source=['books'], omit=['*/tests/*'])
+    cov.set_option('report:show_missing', True)
+    cov.erase()
+    cov.start()
+
     execute_from_command_line(sys.argv)
+
+    if is_testing:
+        cov.stop()
+        cov.save()
+        cov.report()

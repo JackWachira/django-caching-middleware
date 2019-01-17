@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.6"
+
+install:
+  - pip install -r requirements.txt
+
+env:
+  - SECRET_KEY='m$hd%op#dm&+xle#g7-8=9(j1m3c6j+kz8u7j)hff&7c^!j7(d'
+
+script:
+  - python manage.py test --settings=django_caching.settings.test
+
+after_success:
+  - coveralls
