@@ -122,10 +122,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 
 CACHE_URLS = [
     {
-        'URL': 'api/v1/test',
-        'TIME': '600'
+        'URL': '/api/v1/test/',
+        'TIMEOUT': '600'
+    },
+    {
+        'URL': '/api/v1/books/',
+        'TIMEOUT': '300'
     }
 ]

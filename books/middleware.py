@@ -1,6 +1,8 @@
 import re
 
-regex_http_ = re.compile(r'^HTTP_AGENT$')
+from django.conf import settings
+from django.core.cache import cache
+from django.urls import resolve
 
 
 class UrlCacheMiddleware:
@@ -15,6 +17,14 @@ class UrlCacheMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        print(request.__dict__)
+        cache_url = next((
+            item for item in settings.CACHE_URLS if item["URL"] == request.path), None)
+        timeout = int(cache_url['TIMEOUT'])
+        url = cache_url['URL']
+
+        cached_response = cache.get(url)
+        if cached_response:
+            return cached_response
         response = self.get_response(request)
+        cache.set(url, response, timeout)
         return response
