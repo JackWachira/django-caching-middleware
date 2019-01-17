@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.core.cache import caches
+from django.http import JsonResponse
+from rest_framework import status
 
 
 class UrlCacheMiddleware:
@@ -18,7 +20,10 @@ class UrlCacheMiddleware:
         cache_url = next((
             item for item in settings.CACHE_URLS if item["URL"] == request.path), None)
         if cache_url:
-            timeout = int(cache_url['TIMEOUT'])
+            try:
+                timeout = int(cache_url['TIMEOUT'])
+            except ValueError:
+                return JsonResponse({'error': 'Set the timeout as a string representing number of seconds'}, status=status.HTTP_400_BAD_REQUEST)
             url = cache_url['URL']
 
             cached_response = self.cache.get(url)

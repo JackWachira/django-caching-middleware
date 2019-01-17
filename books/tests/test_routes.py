@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.cache import caches
 from django.test import Client, TestCase
 from django.urls import reverse
+from rest_framework import status
 
 from ..models import Author, Book, Publisher
 
@@ -74,7 +75,7 @@ class ViewBooksTestCase(TestCase):
         publishers_response = self.client.get(reverse('publishers-list'))
         self.assertEqual(len(publishers_response.data), 1)
 
-        sleep(3)
+        sleep(3)  # wait 3 seconds for cache to expire
 
         publishers_response = self.client.get(reverse('publishers-list'))
         publisher1_name = publishers_response.data[0]['title']
@@ -82,6 +83,15 @@ class ViewBooksTestCase(TestCase):
         self.assertEqual(len(publishers_response.data), 2)
         self.assertEqual(publisher1_name, self.publisher.title)
         self.assertEqual(publisher2_name, publisher2.title)
+
+    def test_invalid_timeout_format(self):
+        """Tests if error is returned if timeout is in incorrect format.
+        """
+        test_response = self.client.get(reverse('test-list'))
+        self.assertEqual(test_response.status_code,
+                         status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(test_response.json()['error'],
+                         'Set the timeout as a string representing number of seconds')
 
     def tearDown(self):
         del self.client

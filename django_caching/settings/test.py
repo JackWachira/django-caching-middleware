@@ -18,6 +18,10 @@ CACHE_URLS = [
     {
         'URL': '/api/v1/library/publishers/',
         'TIMEOUT': '2'
+    },
+    {
+        'URL': '/api/v1/library/test/',
+        'TIMEOUT': '30+6'
     }
 ]
 

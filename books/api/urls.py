@@ -7,6 +7,7 @@ router = routers.SimpleRouter()
 router.register(r'books', views.BooksViewSet, base_name='books')
 router.register(r'authors', views.AuthorsViewSet, base_name='authors')
 router.register(r'publishers', views.PublishersViewSet, base_name='publishers')
+router.register(r'test', views.TestViewSet, base_name='test')
 
 urlpatterns = [
     url(r'^', include(router.urls)),
