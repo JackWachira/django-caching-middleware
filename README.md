@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/JackWachira/django-caching-middleware/badge.svg?branch=master)](https://coveralls.io/github/JackWachira/django-caching-middleware?branch=master)
+[![Build Status](https://travis-ci.org/JackWachira/django-caching-middleware.svg?branch=master)](https://travis-ci.org/JackWachira/django-caching-middleware)
 # django-caching-middleware
 Django middleware that takes a list of urls from settings file and caches them
 
