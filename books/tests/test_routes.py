@@ -9,8 +9,8 @@ from rest_framework import status
 from ..models import Author, Book, Publisher
 
 
-class ViewBooksTestCase(TestCase):
-    """Tests view books route."""
+class LibraryTestCase(TestCase):
+    """Tests view library route."""
 
     def setUp(self):
         self.client = Client()
