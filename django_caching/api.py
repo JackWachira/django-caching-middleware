@@ -9,5 +9,5 @@ Using Class-based views
 from django.conf.urls import include, url
 
 urlpatterns = [
-    url(r'books/', include('books.api.urls')),
+    url(r'library/', include('books.api.urls')),
 ]

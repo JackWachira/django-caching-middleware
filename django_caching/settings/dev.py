@@ -12,11 +12,11 @@ CACHES = {
 
 CACHE_URLS = [
     {
-        'URL': '/api/v1/test/',
+        'URL': '/api/v1/library/authors/',
         'TIMEOUT': '60'
     },
     {
-        'URL': '/api/v1/books/',
+        'URL': '/api/v1/library/books/',
         'TIMEOUT': '30'
     }
 ]
