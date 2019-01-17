@@ -7,6 +7,13 @@ class Author(BaseModel):
     last_name = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
+        return self.first_name
+
+
+class Publisher(BaseModel):
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
         return self.title
 
 
@@ -14,6 +21,8 @@ class Book(BaseModel):
     title = models.CharField(max_length=100)
     author = models.ForeignKey(
         Author, on_delete=models.CASCADE, null=True, blank=True)
+    publisher = models.ForeignKey(
+        Publisher, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title
